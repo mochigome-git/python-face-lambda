@@ -33,7 +33,7 @@ This project provides a scalable solution for face recognition using AWS Lambda.
 
 ## Architecture
 
-![Architecture Diagram](path/to/architecture-diagram.png)
+![Architecture Diagram](architecture-diagram.png)
 
 ## Getting Started
 
