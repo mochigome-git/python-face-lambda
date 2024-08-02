@@ -1,6 +1,6 @@
 # python-face-lambda
 
-##### python-face-lambda is a serverless face recognition application built using AWS Lambda. The project contains three main functions: reg, train, and rec, which are designed to capture, train, and recognize faces using a k-nearest neighbors (KNN) model.
+#### python-face-lambda is a serverless face recognition application built using AWS Lambda. The project contains three main functions: reg, train, and rec, which are designed to capture, train, and recognize faces using a k-nearest neighbors (KNN) model.
 
 ## Table of Contents
 
