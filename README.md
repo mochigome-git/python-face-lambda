@@ -67,14 +67,14 @@ aws configure
 ### Deploying to AWS Lambda
 
 #### Build the Docker image:
-
+##### Refer to the every dockerfile locate in reg, rec, train to run docker build.
 ```bash
-docker build -t python-face-lambda .
+docker build -t python-face-xxx .
 ```
 
 #### Push the Docker image to AWS ECR (Elastic Container Registry):
 ```bash
-aws ecr create-repository --repository-name python-face-lambda
+aws ecr create-repository --repository-name python-face-xxx
 $(aws ecr get-login --no-include-email --region your-region)
 docker tag python-face-lambda:latest your-account-id.dkr.ecr.your-region.amazonaws.com/python-face-lambda:latest
 docker push your-account-id.dkr.ecr.your-region.amazonaws.com/python-face-lambda:latest
@@ -82,7 +82,7 @@ docker push your-account-id.dkr.ecr.your-region.amazonaws.com/python-face-lambda
 
 #### the Lambda function:
 ```bash
-aws lambda create-function --function-name python-face-lambda --package-type Image --code ImageUri=your-account-id.dkr.ecr.your-region.amazonaws.com/python-face-lambda:latest --role your-lambda-execution-role-arn
+aws lambda create-function --function-name python-face-xxx --package-type Image --code ImageUri=your-account-id.dkr.ecr.your-region.amazonaws.com/python-face-lambda:latest --role your-lambda-execution-role-arn
 ```
 
 ## Function Details
