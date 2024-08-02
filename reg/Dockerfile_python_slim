@@ -1,0 +1,31 @@
+FROM python:3.9-slim
+
+# Install necessary dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        git nano cmake make g++ libssl-dev libcurl4-openssl-dev \
+    ln -s /usr/bin/python3 /usr/bin/python && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Change the working directory
+WORKDIR /var/task
+
+# Install any dependencies specified in requirements.txt
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application code into the container
+COPY testfile/* .
+COPY face_sample/* .
+COPY lambda_lite_version/facerec_register.py .
+
+# Expose ports for HTTP and HTTPS
+EXPOSE 8080
+
+# Set the CMD to your handler
+CMD ["facerec_register.lambda_handler"]
+
+# Usage
+# docker build --platform linux/amd64 -t facerec_register_lambda:test .
+# docker run --platform linux/amd64 -p 9000:8080 facerec_register_lambda:test

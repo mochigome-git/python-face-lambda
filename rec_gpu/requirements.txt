@@ -1,0 +1,12 @@
+scikit-learn
+dlib
+face_recognition
+opencv-contrib-python
+setuptools
+python-dotenv
+gunicorn
+eventlet
+flask
+flask-socketio
+boto3
+image

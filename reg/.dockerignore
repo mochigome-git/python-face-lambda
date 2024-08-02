@@ -1,0 +1,7 @@
+# Ignore unnecessary file 
+# Ignore specific directories
+facerec_reg_virtual_env/
+package/
+
+# Ignore all .zip files
+*.zip

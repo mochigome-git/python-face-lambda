@@ -1,0 +1,8 @@
+# Avoid Private Credentials expose
+testfile/*
+testfile/
+.env
+.env.local
+
+*/certificates
+*/usage.md

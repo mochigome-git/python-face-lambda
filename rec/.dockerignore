@@ -1,0 +1,18 @@
+# Ignore unnecessary file 
+# Ignore specific directories
+face_sample/
+facerec_reg_virtual_env/
+package/
+testfile/
+opencv/
+opencv_contrib/
+certificates/
+enable_CUDA/
+
+# Ignore all .zip files
+*.zip
+# .env
+
+# Ignore test py
+facerec_rec_known.py
+facerec_rec_known.py

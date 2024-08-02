@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Video Stream</title>
+    <style>
+        #container {
+            text-align: center;
+        }
+        video {
+            display: none;
+        }
+        #videoElement {
+            display: none; 
+        }
+        #image {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <video autoplay="true" id="videoElement" width="700"></video>
+        <img id="image">
+    </div>
+
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        var socket = io();
+
+        socket.on('connect', function(){
+            console.log("Connected...!", socket.connected);
+        });
+
+        const video = document.querySelector("#videoElement");
+        const imageElem = document.querySelector("#image");
+        const FPS = 10; // Reducing FPS to 10 frames per second
+
+        if (navigator.mediaDevices.getUserMedia) {
+            // Request media access with preferred facing mode
+            const constraints = { video: { facingMode: "environment" } }; 
+            // Front Camera = { video: true }
+            // Rear Camera = { video: { facingMode: "environment" } }
+            navigator.mediaDevices.getUserMedia(constraints)
+            .then(function (stream) {
+                video.srcObject = stream;
+                video.play();  // Play the video stream to keep it active
+            })
+            .catch(function (error) {
+                console.error("Error accessing the camera: ", error);
+            });
+        }
+
+        function sendFrame() {
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth; // Resizing the captured frame to half its size
+            canvas.height = video.videoHeight; // Resizing the captured frame to half its size
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            const dataURL = canvas.toDataURL('image/webp', 0.8); // Lower quality setting
+            const base64Data = dataURL.replace(/^data:image\/webp;base64,/, '');
+
+            socket.emit('image', base64Data);
+
+            // Explicitly remove the canvas element
+            canvas.remove();
+        }
+
+        setInterval(sendFrame, 1000 / FPS);
+
+        socket.on('response_back', function(image){
+            imageElem.src = image;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+scikit-learn
+numpy
+requests
+boto3
+Flask
+flask_socketio

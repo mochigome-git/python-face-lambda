@@ -1,0 +1,9 @@
+#lite version remove this
+scipy
+numpy==1.26.4
+face_recognition
+requests
+Pillow
+setuptools
+git+https://github.com/ageitgey/face_recognition_models
+#python-dotenv
